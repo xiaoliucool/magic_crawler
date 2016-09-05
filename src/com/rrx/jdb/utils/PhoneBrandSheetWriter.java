@@ -24,23 +24,22 @@ class PhoneBrandSheetWriter implements ISheetWriter<PhoneBrand> {
 
 	@Override
 	public boolean generate(HSSFWorkbook workbook, List<PhoneBrand> phoneBrandList) {
+		System.out.println("start write sheet");
 		HSSFSheet tSheet = workbook.getSheet(SHEET_NAME);
 		if (tSheet == null) {
 			tSheet = workbook.createSheet(SHEET_NAME);
 			HSSFRow row = tSheet.createRow(0);
 			row.createCell(0).setCellValue("手机品牌");
-			row.createCell(1).setCellValue("英文名");
-			row.createCell(2).setCellValue("手机ID");
-			row.createCell(3).setCellValue("对应的url链接");
+			row.createCell(1).setCellValue("手机ID");
+			row.createCell(2).setCellValue("对应的url链接");
 		}
 		int tAlreadyRows = tSheet.getLastRowNum() + 1;
 		for (int i = 0; i < phoneBrandList.size(); i++) {
 			PhoneBrand tBrand = phoneBrandList.get(i);
 			HSSFRow iterRow = tSheet.createRow(tAlreadyRows++);
 			iterRow.createCell(0).setCellValue(tBrand.getPhoneNameInChinese());
-			iterRow.createCell(1).setCellValue(tBrand.getPhoneNameInEnglish());
-			iterRow.createCell(2).setCellValue(tBrand.getId());
-			iterRow.createCell(3).setCellValue(tBrand.getUrl());
+			iterRow.createCell(1).setCellValue(tBrand.getId());
+			iterRow.createCell(2).setCellValue(tBrand.getUrl());
 		}
 		return true;
 	}

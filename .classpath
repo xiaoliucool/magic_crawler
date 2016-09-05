@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="libs/poi-3.9.jar"/>
 	<classpathentry kind="lib" path="libs/poi-ooxml-3.9.jar"/>
 	<classpathentry kind="lib" path="libs/poi-ooxml-schemas-3.9.jar"/>
+	<classpathentry kind="lib" path="libs/jsoup-1.9.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -27,7 +27,7 @@ public class Main {
 		}
 		String tUrl = ArgCollections.getInstance().getInputArg().getArgValue(); 
 		System.out.println("input: " + tUrl);
-		String tHtmlContent = HttpUtils.getHtml("http://mobile.zol.com.cn/");
+		String tHtmlContent = HttpUtils.getHtml("http://mobile.zol.com.cn/manu_list.html");
 		System.out.println(tHtmlContent);
 		System.out.println("success!!");
 	}
