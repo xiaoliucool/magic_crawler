@@ -1,8 +1,7 @@
 package com.rrx.jdb.utils;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -27,29 +26,50 @@ public class SheetUtils {
 	 * @return true 成功； false 失败
 	 */
 	public static boolean generatePhoneBrandSheet(List<PhoneBrand> phoneList) {
-		File file = new File("f:"+File.separator+"tt"+File.separator+"ab.xls");
-		try {
-			file.createNewFile();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		System.out.println(file.getAbsolutePath());
-		System.out.println(file.isFile());
-		System.out.println(file.isDirectory());
+		File tFile = new File("f:"+File.separator+"tt");
 		HSSFWorkbook tWorkbook = null;
 		try {
-			tWorkbook = new HSSFWorkbook(new FileInputStream(file));
-			System.out.println("dfdfdfd");
-			ISheetWriter<PhoneBrand> tSheetWriter = new PhoneBrandSheetWriter();
-			boolean tIsSuccess = tSheetWriter.generate(tWorkbook, phoneList);
-			if (tIsSuccess) {
-				return true;
-			}
+			tWorkbook = new HSSFWorkbook();
+			System.out.println("新建工作簿");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("generate phone brand sheet failed.");
-		} 
+		}
+		ISheetWriter<PhoneBrand> tSheetWriter = new PhoneBrandSheetWriter();
+		boolean tIsSuccess = tSheetWriter.generate(tWorkbook, phoneList);
+		if (tIsSuccess) {
+			return write2Excel(tWorkbook, tFile);
+		}
 		return false;
+	}
+	/**
+	 * 具体的写excle文件
+	 * @param tWorkbook 工作簿
+	 * @param outputDir 输入excel文件的路径
+	 * @return true 成功；false 失败
+	 */
+	private static boolean write2Excel(HSSFWorkbook tWorkbook, File outputDir){
+		if (!outputDir.exists()) {
+			outputDir.mkdirs();
+		}
+		File outputFile = new File(outputDir, "abc.xls");
+		FileOutputStream tFos = null;
+		try {
+			tFos = new FileOutputStream(outputFile);
+			tWorkbook.write(tFos);
+			return true;
+		} catch (Exception e) {
+			System.out.println("写文件出错了");
+			e.printStackTrace();
+			return false;
+		} finally{
+			if (tFos!=null) {
+				try {
+					tFos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
