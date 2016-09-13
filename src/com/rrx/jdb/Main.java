@@ -61,4 +61,17 @@ public class Main {
 		}
 		return i;
 	}
+	/**
+	 * int redo = 0;     //重试次数 
+while(redo<MAXTRY+1){     //MAXTRY为最大重试次数 
+        try{ 
+                doSomething();    //可能发生特殊情况的方法 
+                break;                    //执行成功后直接退出此循环 
+        }catch{ 
+                redo++;                 //异常时,重试次数增加 
+                continue;             //结束本次循环 
+        } 
+} 
+
+	 */
 }

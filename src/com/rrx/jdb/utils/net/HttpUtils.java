@@ -135,4 +135,8 @@ public class HttpUtils {
 		}
 		return tResponseMsg;
 	}
+	public static void main(String[] args) {
+		
+		System.out.println(HttpUtils.getHtml("http://www.zol.com.cn/brand.html"));
+	}
 }
